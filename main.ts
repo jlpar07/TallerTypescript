@@ -6,10 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!app) {
         console.error('No se encontró el elemento con id tabla');
     } else {
-        console.log('Elemento tabla encontrado, generando tabla...');
+        var promedio = 0;
+        series.forEach(serie => {
+            promedio += serie.getSeasons();
+        })
+        promedio /= series.length;
         
         app.innerHTML = `
-        <table border="1" style="border-collapse: collapse; width: 100%;">
+        <table>
         <thead>
             <tr>
             <th scope="col">#</th>
@@ -29,9 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         `).join('')}
         </tbody>
         </table>
+        <p>Season average: ${promedio}</p>
         `;
-        
-        console.log('Tabla generada correctamente');
     }
 });
 
