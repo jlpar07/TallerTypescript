@@ -1,12 +1,12 @@
-import { series } from "./data";
+import { series } from "./data.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-    const app = document.getElementById("tabla");
+document.addEventListener('DOMContentLoaded', () => {
+    const app = document.getElementById('tabla');
 
     if (!app) {
-        console.error("No se encontró el elemento con id tabla");
+        console.error('No se encontró el elemento con id tabla');
     } else {
-        console.log("Elemento tabla encontrado, generando tabla...");
+        console.log('Elemento tabla encontrado, generando tabla...');
         
         app.innerHTML = `
         <table border="1" style="border-collapse: collapse; width: 100%;">

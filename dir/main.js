@@ -1,4 +1,4 @@
-import { series } from "./data";
+import { series } from "./data.js";
 document.addEventListener("DOMContentLoaded", () => {
     const app = document.getElementById("tabla");
     if (!app) {
