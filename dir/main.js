@@ -1,37 +1,19 @@
-import { series } from "./data.js";
-document.addEventListener("DOMContentLoaded", () => {
-    const app = document.getElementById("tabla");
-    if (!app) {
-        console.error("No se encontró el elemento con id tabla");
-    }
-    else {
-        var promedio = 0;
-        series.forEach(serie => {
-            promedio += serie.getSeasons();
-        })
-        promedio /= series.length;
-        app.innerHTML = `
-        <table>
-        <thead>
-            <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Channel</th>
-            <th scope="col">Seasons</th>
-            </tr>
-        </thead>
-        <tbody>
-            ${series.map(serie => `
-                            <tr>
-                                <td>${serie.getId()}</td>
-                                <td>${serie.getName()}</td>
-                                <td>${serie.getChannel()}</td>
-                                <td>${serie.getSeasons()}</td>
-                            </tr>
-                        `).join('')}
-        </tbody>
-        </table>
-        <p>Season average: ${promedio}</p>
-        `;
-    }
+import { series } from './data.js';
+import { ListGroup } from './list-group.js';
+import { SerieCard } from './serie-card.js';
+
+const serieCard = new SerieCard('serie-detail');
+
+serieCard.clear();
+
+const listGroup = new ListGroup(series, (selectedSerie) => {
+    serieCard.showSerieDetail(selectedSerie);
 });
+
+const avgSeasons = calculateAvgSeasons(series);
+const avgElement = document.getElementById("average-seasons");
+avgElement.innerHTML = `Seasons average: ${avgSeasons}`;
+function calculateAvgSeasons(series) {
+    const totalSeasons = series.reduce((sum, serie) => sum + serie.getSeasons(), 0);
+    return totalSeasons / series.length;
+}
